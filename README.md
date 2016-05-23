@@ -13,6 +13,11 @@ this.dualBind(
             name: 'subUser',
             property: 'value',
             propertyChangeEventType: 'valueChange'
+        },
+        {
+            name: 'subUsers',
+            property: 'datasource',
+            nameChangeEventType: 'viewmodelchange'
         }
     ],
     {
@@ -23,7 +28,7 @@ this.dualBind(
 ```
 
 ```javascript
-this.singleBind(
+this.bindModelToControl(
     this.model,
     this.get('controlId'),
     [
@@ -31,6 +36,24 @@ this.singleBind(
             name: 'subUsers',
             property: 'datasource',
             nameChangeEventType: 'viewmodelchange'
+        }
+    ],
+    {
+        modelChangeEventType: 'change',
+        controlChangeEventType: 'change',
+    }
+);
+```
+
+```javascript
+this.bindControlToModel(
+    this.model,
+    this.get('controlId'),
+    [
+        {
+            name: 'subUser',
+            property: 'value',
+            propertyChangeEventType: 'valuechange'
         }
     ],
     {

@@ -105,8 +105,45 @@ function syncControlWithModel(model, control, bindings, config) {
 export default {
 
     /**
+     * Single bind the Model data and control property,
+     * sync the `Control` property when `Model` data changed.
+     *
+     * @method binder.bindModelToControl
+     * @param {Model} model Model instance
+     * @param {Control} control Control instance
+     * @param {Array} bindings binding relations config
+     * @param {Object} [config={}] global binding config
+     */
+    bindModelToControl(model, control, bindings, config = {}) {
+        config = {...DEFAULT_BIND_CONFIG, config};
+
+        // Sync `Control` property with `Model` data
+        syncControlWithModel(model, config, bindings, config);
+    },
+
+    /**
+     * Single bind the Model data and control property,
+     * sync the `Model` data when `Control` property changed.
+     *
+     * @method binder.bindControlToModel
+     * @param {Model} model Model instance
+     * @param {Control} control Control instance
+     * @param {Array} bindings binding relations config
+     * @param {Object} [config={}] global binding config
+     */
+    bindControlToModel(model, control, bindings, config = {}) {
+        config = {...DEFAULT_BIND_CONFIG, config};
+
+        // Observe the control changes, envelop the all change events to unified `View change`
+        observeControl(control, bindings, config);
+
+        // Sync `Model` data with `Control` property
+        syncModelWithControl(model, config, bindings, config);
+    },
+
+    /**
      * Dual bind the Model data and the control property,
-     * synchronous the both data.
+     * let the both data be synchronous.
      *
      * @method binder.dualBind
      * @param {Model} model Model instance
@@ -124,22 +161,5 @@ export default {
         syncModelWithControl(model, control, bindings, config);
         // Sync `Control` property with `Model` data
         syncControlWithModel(model, control, bindings, config);
-    },
-
-    /**
-     * Single bind the Model data and control property,
-     * synchronous the both data.
-     *
-     * @method binder.singleBind
-     * @param {Model} model Model instance
-     * @param {Control} control Control instance
-     * @param {Array} bindings binding relations config
-     * @param {Object} [config={}] global binding config
-     */
-    singleBind(model, control, bindings, config = {}) {
-        config = {...DEFAULT_BIND_CONFIG, config};
-
-        // Sync `Control` property with `Model` data
-        syncControlWithModel(model, config, bindings, config);
     }
 };
