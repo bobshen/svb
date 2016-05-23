@@ -1,0 +1,20 @@
+{
+    "name": "svb",
+    "version": "0.1.0",
+    "description": "Just as a Simple View Binder",
+    "main": "binder",
+    "maintainers": [
+        {
+            "name": "shenbin",
+            "email": "bobshenbin@gmail.com"
+        }
+    ],
+    "contributors": [
+        {
+            "name": "shenbin",
+            "email": "bobshenbin@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "repository": "https://github.com/bobshen/svb.git"
+}
